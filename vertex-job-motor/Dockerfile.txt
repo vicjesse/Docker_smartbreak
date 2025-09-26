@@ -2,7 +2,7 @@
 
 # 1. ESCOLHA A IMAGEM BASE
 # Usamos uma imagem oficial do Python, ideal para desenvolvimento.
-FROM python:3.9-slim 
+FROM python:3.9
 
 # 2. DEFINE O DIRETÓRIO DE TRABALHO
 # Tudo será executado neste diretório dentro do contêiner.
@@ -22,4 +22,5 @@ COPY src/ .
 
 # 5. DEFINE O PONTO DE ENTRADA
 # O comando que o contêiner roda quando é iniciado.
+
 ENTRYPOINT ["python", "main.py"]
