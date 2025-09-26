@@ -1,0 +1,16 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/motor-nivel-par-repo/modelo-previsao:latest', '.']
+#
+# O próximo passo (push) será feito automaticamente, mas você pode adicioná-lo
+# se quiser ser explícito:
+#
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/motor-nivel-par-repo/modelo-previsao:latest']
+
+images:
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/motor-nivel-par-repo/modelo-previsao:latest'
+
+# Configuração que resolve o erro de log: forçar o uso do Cloud Logging
+options:
+  logging: CLOUD_LOGGING_ONLY
