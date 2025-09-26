@@ -1,14 +1,13 @@
 # Dockerfile
 
 # 1. ESCOLHA A IMAGEM BASE
-# Retornamos para a slim (mais leve) para que possamos controlar as ferramentas.
 FROM python:3.9-slim 
 
 # 2. DEFINE O DIRETÓRIO DE TRABALHO
 WORKDIR /app
 
-# 3. INSTALA FERRAMENTAS DO SISTEMA (A SOLUÇÃO)
-# O Prophet precisa dessas ferramentas para ser compilado com sucesso.
+# 3. INSTALA FERRAMENTAS DO SISTEMA (CRUCIAL PARA PROPHET/SCIPY)
+# Instala o compilador C/C++ e o Fortran, necessários para a instalação de pacotes como Prophet.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gfortran \
@@ -18,7 +17,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 4. COPIA E INSTALA DEPENDÊNCIAS PYTHON
 COPY requirements.txt .
 
-# Instala as bibliotecas. Agora, as ferramentas necessárias estão instaladas.
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 5. COPIA O CÓDIGO-FONTE
