@@ -1,0 +1,25 @@
+# Dockerfile
+
+# 1. ESCOLHA A IMAGEM BASE
+# Usamos uma imagem oficial do Python, ideal para desenvolvimento.
+FROM python:3.9-slim 
+
+# 2. DEFINE O DIRETÓRIO DE TRABALHO
+# Tudo será executado neste diretório dentro do contêiner.
+WORKDIR /app
+
+# 3. COPIA E INSTALA DEPENDÊNCIAS
+# Copia o arquivo requirements.txt da sua máquina local para o contêiner.
+COPY requirements.txt .
+
+# Instala todas as bibliotecas Python (pandas, prophet, etc.)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 4. COPIA O CÓDIGO-FONTE
+# Copia todos os seus scripts Python da pasta 'src/' para o contêiner.
+# Isto é crucial para incluir: main.py, modelo_nivel_par.py, etc.
+COPY src/ .
+
+# 5. DEFINE O PONTO DE ENTRADA
+# O comando que o contêiner roda quando é iniciado.
+ENTRYPOINT ["python", "main.py"]
